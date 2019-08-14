@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "alias": "shotgun-b2c-web-debug",
+  "name": "shotgun-b2c-web-debug",
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
+  "env": {
+    "API_URL": "https://shotgun-b2c-back-staging.herokuapp.com"
+  },
+  "build": {
+    "env": {
+      "API_URL": "https://shotgun-b2c-back-staging.herokuapp.com"
+    }
+  },
+  "routes": [
+    { "src": "/events", "dest": "/" },
+    { "src": "/events/(?<id>[^/]+)/shop", "dest": "events/shop?id=$id" },
+    {
+      "src": "/events/(?<id>[^/]+)/widget",
+      "dest": "events/shop?id=$id&embedded=true"
+    },
+    {
+      "src": "/events/(?<id>[^/]+)/shop/checkout",
+      "dest": "events/shop/checkout?id=$id"
+    },
+    {
+      "src": "/events/(?<id>[^/]+)/shop/checkout/billing",
+      "dest": "events/shop/checkout/billing?id=$id"
+    },
+    {
+      "src": "/events/(?<id>[^/]+)/shop/checkout/payment",
+      "dest": "events/shop/checkout/payment?id=$id"
+    },
+    {
+      "src": "/events/(?<id>[^/]+)/shop/checkout/confirmation",
+      "dest": "events/shop/checkout/confirmation?id=$id"
+    },
+    { "src": "/venues/(?<id>[^/]+)", "dest": "venues?id=$id" },
+    {
+      "src": "/venues/(?<id>[^/]+)/widget",
+      "dest": "venues?id=$id&embedded=true"
+    },
+    { "src": "/profile", "dest": "users/profile" },
+    { "src": "/tickets/(?<id>[^/]+)", "dest": "events/shop?id=$id" }
+  ]
+}
